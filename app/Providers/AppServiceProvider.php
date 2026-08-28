@@ -21,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        setlocale(LC_ALL, 'C.UTF-8');
+
         RateLimiter::for('contact', function ($request) {
             return Limit::perMinute(5)->by($request->ip());
         });
